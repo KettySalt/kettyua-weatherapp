@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link href="src/styles.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/e2a0bd9b84.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="contenier">
+      <div class="card">
+        <div class="card-body">
+          <form class="form-search">
+            <div class="row g-1">
+              <div class="col-7">
+                <div class="input-box">
+                  <input
+                    type="text"
+                    placeholder="City"
+                    class="search"
+                    id="input-city"
+                    style="width: 100%"
+                  />
+                  <i class="fa fa-search"></i>
+                </div>
+              </div>
+              <div class="col-2">
+                <input type="submit" value="Search" style="width: 100%" />
+              </div>
+              <div class="col-2">
+                <input
+                  type="button"
+                  value="Current"
+                  style="width: 100%"
+                  id="current"
+                />
+              </div>
+            </div>
+          </form>
+          <div class="row today g-1">
+            <div class="col-4">
+              <h1 id="city-name">KYIV</h1>
+              <ul class="day">
+                <li id="data-today">4 Sept, Sunday 15 PM</li>
+                <li id="sky">Clouds</li>
+              </ul>
+            </div>
+            <div class="col-3 align-self-center">
+              <h2 class="temper">
+                <span id="ico">🌤</span><span id="today-temperature">19</span
+                ><span class="units"
+                  ><a href="#" class="degree" id="сelsius">°C</a> |
+                  <a href="#" class="degree" id="fahrenheit">°F</a></span
+                >
+              </h2>
+            </div>
+            <div class="col-2 details vertical">
+              <ul class="data">
+                <li class="impotant">High</li>
+                <li id="temp-max">21℃</li>
+                <li class="impotant">Low</li>
+                <li id="temp-min">15℃</li>
+              </ul>
+            </div>
+            <div class="col-2 details">
+              <ul class="data">
+                <li class="impotant">Humidity</li>
+                <li id="hum">46%</li>
+
+                <li class="impotant">Wind</li>
+                <li id="wind">16km/h</li>
+              </ul>
+            </div>
+            <!-- <div class="col-2 details vertical">
+              <span class="impotant">21℃</span>
+              <br />
+              high
+              <br />
+              <span class="impotant">15℃</span>
+              <br />
+              low
+            </div>
+            <div class="col-2 details">
+              <span class="impotant">Precipitation</span>
+              <br />
+              46%
+              <br />
+              <span class="impotant">Wind</span>
+              <br />
+              16km/h
+            </div> -->
+          </div>
+          <div class="row week g-1">
+            <div class="col-1"></div>
+            <div class="col-2">
+              Mon
+              <br />
+              <img src="src/ico/cloud.png" alt="" width="25px" />
+              <br />
+              22℃
+            </div>
+            <div class="col-2">
+              Tue
+              <br />
+              <img src="src/ico/rain.png" alt="" width="25px" />
+              <br />
+              19℃
+            </div>
+            <div class="col-2">
+              Wen
+              <br />
+              <img src="src/ico/rain-sun.png" alt="" width="25px" />
+              <br />
+              20℃
+            </div>
+            <div class="col-2">
+              Thur
+              <br />
+              <img src="src/ico/cloud-sun.png" alt="" width="25px" />
+              <br />
+              20℃
+            </div>
+            <div class="col-2">
+              Fri
+              <br />
+              <img src="src/ico/sun.png" alt="" width="25px" />
+              <br />
+              19℃
+            </div>
+          </div>
+        </div>
+        <p class="coder">Coded by Kateryna Gavryliuk</p>
+      </div>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>

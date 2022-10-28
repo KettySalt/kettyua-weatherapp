@@ -1,0 +1,80 @@
+h1,
+.coder {
+  color: #006ec5;
+}
+
+.form-search {
+  margin: 20px auto 15px auto;
+  text-align: center;
+}
+.input-box {
+  position: relative;
+}
+.input-box i {
+  position: absolute;
+  right: 3px;
+  top: 7px;
+  color: #ced4da;
+}
+.card {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 33%;
+  margin: 10px auto;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
+.vertical {
+  border-left: 6px solid green;
+}
+.details {
+  font-size: 10px;
+  line-height: 22px;
+  text-align: center;
+  border-left: 1px solid rgb(89, 99, 116);
+}
+.impotant {
+  font-weight: bold;
+}
+.day {
+  font-size: 12px;
+}
+.temper {
+  font-size: 35px;
+  letter-spacing: 0;
+}
+.week {
+  text-align: center;
+  margin: 0 auto 30px auto;
+}
+.today {
+  margin: 0 auto 30px auto;
+}
+.card-body {
+  position: relative;
+}
+.coder {
+  position: absolute;
+  left: 3px;
+  bottom: -38px;
+  font-size: 12px;
+  opacity: 75%;
+}
+.units {
+  font-size: 12px;
+  vertical-align: 16px;
+}
+.degree {
+  text-decoration: none;
+}
+.form-check-label {
+  font-size: 12px;
+}
+.data,
+.day {
+  padding-left: 0;
+  list-style: none;
+}
