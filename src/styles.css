@@ -1,8 +1,9 @@
-h1,
-.coder {
+h1 {
   color: #006ec5;
 }
-
+a {
+  color: #006ec5;
+}
 .form-search {
   margin: 20px auto 15px auto;
   text-align: center;
