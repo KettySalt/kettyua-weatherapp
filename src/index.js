@@ -4,12 +4,6 @@ function convertCtoF(celsius) {
   return fahrn;
 }
 
-function convertFtoC(fahrn) {
-  let celsius = ((fahrn - 32) * 5) / 9;
-  celsius = Math.round(celsius);
-  return celsius;
-}
-
 function upperCity(city) {
   let arrayCity = city.split(" ");
   for (let i = 0; i < arrayCity.length; i++) {
@@ -58,26 +52,28 @@ today.innerHTML = `${now.getDate()} ${monthes[now.getMonth()]}, ${
 function showDegreeFahrenheit(event) {
   event.preventDefault();
   let temperature = document.querySelector("#today-temperature");
-  temperature.innerHTML = convertCtoF(temperature.innerHTML);
+  temperature.innerHTML = convertCtoF(celsiusTemperature);
+  let fahrinheitUnit = document.querySelector("#fahrenheit");
+  fahrinheitUnit.classList.add("active");
+  let celsiusUnit = document.querySelector("#сelsius");
+  celsiusUnit.classList.remove("active");
 }
 function showDegreeCelsius(event) {
   event.preventDefault();
   let temperature = document.querySelector("#today-temperature");
-  temperature.innerHTML = convertFtoC(temperature.innerHTML);
+  temperature.innerHTML = celsiusTemperature;
+  let celsiusUnit = document.querySelector("#сelsius");
+  celsiusUnit.classList.add("active");
+  let fahrinheitUnit = document.querySelector("#fahrenheit");
+  fahrinheitUnit.classList.remove("active");
 }
-
-let degreeCelsius = document.querySelector("#сelsius");
-let degreeFahrenheit = document.querySelector("#fahrenheit");
-
-degreeCelsius.addEventListener("click", showDegreeCelsius);
-degreeFahrenheit.addEventListener("click", showDegreeFahrenheit);
 
 function showWeather(response) {
   let cityName = document.querySelector("h1");
   cityName.innerHTML = response.data.name;
-  let temp = Math.round(response.data.main.temp);
+  celsiusTemperature = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#today-temperature");
-  temperature.innerHTML = temp;
+  temperature.innerHTML = celsiusTemperature;
   let tempMax = Math.round(response.data.main.temp_max);
   let high = document.querySelector("#temp-max");
   high.innerHTML = tempMax;
@@ -118,6 +114,13 @@ function urlGeo(position) {
 function requestGeo(event) {
   navigator.geolocation.getCurrentPosition(urlGeo);
 }
+let celsiusTemperature = null;
+
+let degreeCelsius = document.querySelector("#сelsius");
+let degreeFahrenheit = document.querySelector("#fahrenheit");
+
+degreeCelsius.addEventListener("click", showDegreeCelsius);
+degreeFahrenheit.addEventListener("click", showDegreeFahrenheit);
 
 let formSearch = document.querySelector(".form-search");
 formSearch.addEventListener("submit", userCity);

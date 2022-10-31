@@ -79,3 +79,7 @@ a {
   padding-left: 0;
   list-style: none;
 }
+.temper .active {
+  color: black;
+  cursor: default;
+}
