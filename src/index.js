@@ -194,12 +194,15 @@ function urlGeo(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let currentUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
-  alert(currentUrl);
+  let forecast = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(currentUrl).then(showWeather);
+  axios.get(forecast).then(showForecast);
 }
 
 function requestGeo(event) {
   navigator.geolocation.getCurrentPosition(urlGeo);
+  let inputCity = document.querySelector("#input-city");
+  inputCity.value = "City";
 }
 
 let celsiusTemperature = null;
