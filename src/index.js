@@ -194,6 +194,7 @@ function urlGeo(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let currentUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+  alert(currentUrl);
   axios.get(currentUrl).then(showWeather);
 }
 
