@@ -1,9 +1,13 @@
 h1 {
-  color: #006ec5;
+  color: #464077;
 }
 a {
-  color: #006ec5;
+  color: #7069a9;
 }
+a:hover {
+  color: #7069a9;
+}
+
 .form-search {
   margin: 20px auto 15px auto;
   text-align: center;
@@ -11,10 +15,20 @@ a {
 .input-box {
   position: relative;
 }
+.input-box .search {
+  color: rgb(89, 99, 116);
+  border: solid 1px #7069a9;
+  border-radius: 3px;
+}
+.input-box .search:focus {
+  outline: none;
+  border-radius: 3px;
+  border: solid 1.5px #b378bc;
+}
 .input-box i {
   position: absolute;
-  right: 3px;
-  top: 7px;
+  right: 9px;
+  top: 11px;
   color: #ced4da;
 }
 .card {
@@ -23,19 +37,19 @@ a {
   margin-right: auto;
   left: 0;
   right: 0;
-  width: 33%;
+  width: 45%;
   margin: 10px auto;
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 
-.vertical {
+/* .vertical {
   border-left: 6px solid green;
-}
+} */
 .details {
   font-size: 10px;
   line-height: 22px;
   text-align: center;
-  border-left: 1px solid rgb(89, 99, 116);
+  border-left: solid 1px #7069a9;
 }
 .impotant {
   font-weight: bold;
@@ -56,6 +70,8 @@ a {
 }
 .card-body {
   position: relative;
+  margin-left: 30px;
+  margin-bottom: 50px;
 }
 .coder {
   position: absolute;
@@ -79,7 +95,33 @@ a {
   padding-left: 0;
   list-style: none;
 }
+
+li:first-letter {
+  text-transform: capitalize;
+}
 .temper .active {
   color: black;
   cursor: default;
+}
+.search-batton {
+  background-color: #7069a9;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  position: relative;
+}
+.search-batton:hover {
+  opacity: 0.8;
+  top: -4px;
+}
+.current-batton {
+  background-color: #b378bc;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  position: relative;
+}
+.current-batton:hover {
+  opacity: 0.8;
+  top: -4px;
 }

@@ -49,6 +49,11 @@ today.innerHTML = `${now.getDate()} ${monthes[now.getMonth()]}, ${
   week[now.getDay()]
 } ${hours}:${minutes}`;
 
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  return week[date.getDay()];
+}
+
 function showDegreeFahrenheit(event) {
   event.preventDefault();
   let temperature = document.querySelector("#today-temperature");
@@ -57,6 +62,8 @@ function showDegreeFahrenheit(event) {
   fahrinheitUnit.classList.add("active");
   let celsiusUnit = document.querySelector("#сelsius");
   celsiusUnit.classList.remove("active");
+  let feelings = document.querySelector("#feels-like");
+  feelings.innerHTML = `${convertCtoF(feelingTemperature)}℉`;
 }
 function showDegreeCelsius(event) {
   event.preventDefault();
@@ -66,35 +73,93 @@ function showDegreeCelsius(event) {
   celsiusUnit.classList.add("active");
   let fahrinheitUnit = document.querySelector("#fahrenheit");
   fahrinheitUnit.classList.remove("active");
+  let feelings = document.querySelector("#feels-like");
+  feelings.innerHTML = `${feelingTemperature}℃`;
 }
 
 function showWeather(response) {
   let cityName = document.querySelector("h1");
-  cityName.innerHTML = response.data.name;
-  celsiusTemperature = Math.round(response.data.main.temp);
+  cityName.innerHTML = response.data.city;
+  celsiusTemperature = Math.round(response.data.temperature.current);
+
   let temperature = document.querySelector("#today-temperature");
   temperature.innerHTML = celsiusTemperature;
-  let tempMax = Math.round(response.data.main.temp_max);
-  let high = document.querySelector("#temp-max");
-  high.innerHTML = tempMax;
-  let tempMin = Math.round(response.data.main.temp_min);
-  let low = document.querySelector("#temp-min");
-  low.innerHTML = tempMin;
-  let hum = response.data.main.humidity;
+
+  let feelsLike = document.querySelector("#feels-like");
+  feelingTemperature = Math.round(response.data.temperature.feels_like);
+  feelsLike.innerHTML = `${feelingTemperature}℃`;
+
+  let pressure = document.querySelector("#pressure");
+  pressure.innerHTML = `${response.data.temperature.pressure} hPa`;
+
+  let hum = response.data.temperature.humidity;
   let humidity = document.querySelector("#hum");
   humidity.innerHTML = `${hum}%`;
+
   let windSpeed = Math.round(response.data.wind.speed);
   let wind = document.querySelector("#wind");
   wind.innerHTML = `${windSpeed} km/h`;
-  let mainWeather = response.data.weather[0].main;
+
+  let mainWeather = response.data.condition.description;
   let sky = document.querySelector("#sky");
   sky.innerHTML = mainWeather;
+
+  let ico = document.querySelector("#ico");
+  let icoUrl = response.data.condition.icon_url;
+  ico.setAttribute("src", icoUrl);
+}
+
+function showForecast(response) {
+  let firstdayIco = document.querySelector("#first-day");
+  let seconddayIco = document.querySelector("#second-day");
+  let thirddayIco = document.querySelector("#third-day");
+  let fourthIco = document.querySelector("#fourth-day");
+  let fifthdayIco = document.querySelector("#fifth-day");
+  firstdayIco.setAttribute("src", response.data.daily[0].condition.icon_url);
+  seconddayIco.setAttribute("src", response.data.daily[1].condition.icon_url);
+  thirddayIco.setAttribute("src", response.data.daily[2].condition.icon_url);
+  fourthIco.setAttribute("src", response.data.daily[3].condition.icon_url);
+  fifthdayIco.setAttribute("src", response.data.daily[4].condition.icon_url);
+
+  let tempFirst = document.querySelector("#temp-first");
+  let tempSecond = document.querySelector("#temp-second");
+  let tempThird = document.querySelector("#temp-third");
+  let tempFourth = document.querySelector("#temp-fourth");
+  let tempFifth = document.querySelector("#temp-fifth");
+  tempFirst.innerHTML = `${Math.round(
+    response.data.daily[0].temperature.day
+  )}℃`;
+  tempSecond.innerHTML = `${Math.round(
+    response.data.daily[1].temperature.day
+  )}℃`;
+  tempThird.innerHTML = `${Math.round(
+    response.data.daily[2].temperature.day
+  )}℃`;
+  tempFourth.innerHTML = `${Math.round(
+    response.data.daily[3].temperature.day
+  )}℃`;
+  tempFifth.innerHTML = `${Math.round(
+    response.data.daily[4].temperature.day
+  )}℃`;
+
+  let dateFirst = document.querySelector("#first-date");
+  let dateSecond = document.querySelector("#second-date");
+  let dateThird = document.querySelector("#third-date");
+  let dateFourth = document.querySelector("#fourth-date");
+  let dateFifth = document.querySelector("#fifth-date");
+  dateFirst.innerHTML = formatDate(response.data.daily[0].time * 1000);
+  dateSecond.innerHTML = formatDate(response.data.daily[1].time * 1000);
+  dateThird.innerHTML = formatDate(response.data.daily[2].time * 1000);
+  dateFourth.innerHTML = formatDate(response.data.daily[3].time * 1000);
+  dateFifth.innerHTML = formatDate(response.data.daily[4].time * 1000);
 }
 
 function search(city) {
-  let apiKey = "2980ff43226d67e53abfcdb6d457dcc8";
-  let currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiKey = "3te112f50837749e5bfeo6adf636e68f";
+  let currentUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  let forecast = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
   axios.get(currentUrl).then(showWeather);
+  axios.get(forecast).then(showForecast);
 }
 
 function userCity(event) {
@@ -104,10 +169,10 @@ function userCity(event) {
 }
 
 function urlGeo(position) {
-  let apiKey = "2980ff43226d67e53abfcdb6d457dcc8";
+  let apiKey = "3te112f50837749e5bfeo6adf636e68f";
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let currentUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  let currentUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(currentUrl).then(showWeather);
 }
 
@@ -115,6 +180,7 @@ function requestGeo(event) {
   navigator.geolocation.getCurrentPosition(urlGeo);
 }
 let celsiusTemperature = null;
+let feelingTemperature = null;
 
 let degreeCelsius = document.querySelector("#сelsius");
 let degreeFahrenheit = document.querySelector("#fahrenheit");
