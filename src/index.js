@@ -15,12 +15,13 @@ function upperCity(city) {
 let week = [
   "Sunday",
   "Monday",
-  "Tuseday",
+  "Tuesday",
   "Wednesday",
   "Thurthday",
   "Friday",
   "Saturday",
 ];
+let shortWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let monthes = [
   "Jan",
   "Feb",
@@ -51,7 +52,7 @@ today.innerHTML = `${now.getDate()} ${monthes[now.getMonth()]}, ${
 
 function formatDate(timestamp) {
   let date = new Date(timestamp);
-  return week[date.getDay()];
+  return shortWeek[date.getDay()];
 }
 
 function showDegreeFahrenheit(event) {
@@ -64,6 +65,18 @@ function showDegreeFahrenheit(event) {
   celsiusUnit.classList.remove("active");
   let feelings = document.querySelector("#feels-like");
   feelings.innerHTML = `${convertCtoF(feelingTemperature)}℉`;
+
+  let tempFirst = document.querySelector("#temp-first");
+  let tempSecond = document.querySelector("#temp-second");
+  let tempThird = document.querySelector("#temp-third");
+  let tempFourth = document.querySelector("#temp-fourth");
+  let tempFifth = document.querySelector("#temp-fifth");
+
+  tempFirst.innerHTML = `${convertCtoF(celsiusTemperatureFirst)}℉`;
+  tempSecond.innerHTML = `${convertCtoF(celsiusTemperatureSecond)}℉`;
+  tempThird.innerHTML = `${convertCtoF(celsiusTemperatureThird)}℉`;
+  tempFourth.innerHTML = `${convertCtoF(celsiusTemperatureFourth)}℉`;
+  tempFifth.innerHTML = `${convertCtoF(celsiusTemperatureFifth)}℉`;
 }
 function showDegreeCelsius(event) {
   event.preventDefault();
@@ -75,6 +88,18 @@ function showDegreeCelsius(event) {
   fahrinheitUnit.classList.remove("active");
   let feelings = document.querySelector("#feels-like");
   feelings.innerHTML = `${feelingTemperature}℃`;
+
+  let tempFirst = document.querySelector("#temp-first");
+  let tempSecond = document.querySelector("#temp-second");
+  let tempThird = document.querySelector("#temp-third");
+  let tempFourth = document.querySelector("#temp-fourth");
+  let tempFifth = document.querySelector("#temp-fifth");
+
+  tempFirst.innerHTML = `${celsiusTemperatureFirst}℃`;
+  tempSecond.innerHTML = `${celsiusTemperatureSecond}℃`;
+  tempThird.innerHTML = `${celsiusTemperatureThird}℃`;
+  tempFourth.innerHTML = `${celsiusTemperatureFourth}℃`;
+  tempFifth.innerHTML = `${celsiusTemperatureFifth}℃`;
 }
 
 function showWeather(response) {
@@ -126,21 +151,17 @@ function showForecast(response) {
   let tempThird = document.querySelector("#temp-third");
   let tempFourth = document.querySelector("#temp-fourth");
   let tempFifth = document.querySelector("#temp-fifth");
-  tempFirst.innerHTML = `${Math.round(
-    response.data.daily[0].temperature.day
-  )}℃`;
-  tempSecond.innerHTML = `${Math.round(
-    response.data.daily[1].temperature.day
-  )}℃`;
-  tempThird.innerHTML = `${Math.round(
-    response.data.daily[2].temperature.day
-  )}℃`;
-  tempFourth.innerHTML = `${Math.round(
-    response.data.daily[3].temperature.day
-  )}℃`;
-  tempFifth.innerHTML = `${Math.round(
-    response.data.daily[4].temperature.day
-  )}℃`;
+  celsiusTemperatureFirst = Math.round(response.data.daily[0].temperature.day);
+  celsiusTemperatureSecond = Math.round(response.data.daily[1].temperature.day);
+  celsiusTemperatureThird = Math.round(response.data.daily[2].temperature.day);
+  celsiusTemperatureFourth = Math.round(response.data.daily[3].temperature.day);
+  celsiusTemperatureFifth = Math.round(response.data.daily[4].temperature.day);
+
+  tempFirst.innerHTML = `${celsiusTemperatureFirst}℃`;
+  tempSecond.innerHTML = `${celsiusTemperatureSecond}℃`;
+  tempThird.innerHTML = `${celsiusTemperatureThird}℃`;
+  tempFourth.innerHTML = `${celsiusTemperatureFourth}℃`;
+  tempFifth.innerHTML = `${celsiusTemperatureFifth}℃`;
 
   let dateFirst = document.querySelector("#first-date");
   let dateSecond = document.querySelector("#second-date");
@@ -179,8 +200,14 @@ function urlGeo(position) {
 function requestGeo(event) {
   navigator.geolocation.getCurrentPosition(urlGeo);
 }
+
 let celsiusTemperature = null;
 let feelingTemperature = null;
+let celsiusTemperatureFirst = null;
+let celsiusTemperatureSecond = null;
+let celsiusTemperatureThird = null;
+let celsiusTemperatureFourth = null;
+let celsiusTemperatureFifth = null;
 
 let degreeCelsius = document.querySelector("#сelsius");
 let degreeFahrenheit = document.querySelector("#fahrenheit");
