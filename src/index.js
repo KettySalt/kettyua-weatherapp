@@ -202,7 +202,7 @@ function urlGeo(position) {
 function requestGeo(event) {
   navigator.geolocation.getCurrentPosition(urlGeo);
   let inputCity = document.querySelector("#input-city");
-  inputCity.value = "City";
+  inputCity.value = null;
 }
 
 let celsiusTemperature = null;
