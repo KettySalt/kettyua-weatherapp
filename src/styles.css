@@ -123,3 +123,10 @@ li:first-letter {
   opacity: 0.8;
   top: -4px;
 }
+.weather-forecast-temperature-min {
+  opacity: 0.5;
+  font-size: 14px;
+}
+.weather-forecast-temperatures {
+  font-size: 14px;
+}
