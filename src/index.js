@@ -55,28 +55,6 @@ function formatDate(timestamp) {
   return shortWeek[date.getDay()];
 }
 
-function displayForecast() {
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
-  let forecastElement = document.querySelector("#forecast");
-  let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-    <div class="col-2">
-      <div id="first-date">${day}</div>
-        <img src="" alt="" width="60" id="first-day" />
-        <div class="weather-forecast-temperatures">
-        <span class="weather-forecast-temperature-max" id="temp-first">9º</span>
-        <span class="weather-forecast-temperature-min" id="temp-first">6º</span>
-      </div>
-    </div>
-    `;
-  });
-  forecastHTML = forecastHTML + "</div>";
-  forecastElement.innerHTML = forecastHTML;
-}
-
 function showDegreeFahrenheit(event) {
   event.preventDefault();
   let temperature = document.querySelector("#today-temperature");
@@ -156,6 +134,35 @@ function showWeather(response) {
   ico.setAttribute("src", icoUrl);
 }
 
+function displayForecast(response) {
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row forcast-line g-1">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+    <div class="col-2">
+      <div>${formatDate(forecastDay.time * 1000)}</div>
+        <img src="${forecastDay.condition.icon_url}" alt="" width="60" />
+        <div class="weather-forecast-temperatures">
+        <span class="weather-forecast-temperature-max">${Math.round(
+          forecastDay.temperature.maximum
+        )}º</span>
+        <span class="weather-forecast-temperature-min">${Math.round(
+          forecastDay.temperature.minimum
+        )}º</span>
+      </div>
+    </div>
+    `;
+    }
+  });
+  forecastHTML = forecastHTML + "</div>";
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function showForecast(response) {
   let firstdayIco = document.querySelector("#first-day");
   let seconddayIco = document.querySelector("#second-day");
@@ -202,7 +209,7 @@ function search(city) {
   let currentUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   let forecast = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
   axios.get(currentUrl).then(showWeather);
-  axios.get(forecast).then(showForecast);
+  axios.get(forecast).then(displayForecast);
 }
 
 function userCity(event) {
@@ -218,7 +225,7 @@ function urlGeo(position) {
   let currentUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   let forecast = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(currentUrl).then(showWeather);
-  axios.get(forecast).then(showForecast);
+  axios.get(forecast).then(displayForecast);
 }
 
 function requestGeo(event) {
@@ -234,8 +241,6 @@ let celsiusTemperatureSecond = null;
 let celsiusTemperatureThird = null;
 let celsiusTemperatureFourth = null;
 let celsiusTemperatureFifth = null;
-
-displayForecast();
 
 let degreeCelsius = document.querySelector("#сelsius");
 let degreeFahrenheit = document.querySelector("#fahrenheit");

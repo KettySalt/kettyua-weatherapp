@@ -61,7 +61,7 @@ a:hover {
 }
 .week {
   text-align: center;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 25px auto;
 }
 .today {
   margin: 0 auto 30px auto;
@@ -69,6 +69,7 @@ a:hover {
 .card-body {
   position: relative;
   margin-left: 30px;
+  margin-right: 50px;
   margin-bottom: 50px;
 }
 .coder {
