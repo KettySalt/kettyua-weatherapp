@@ -55,6 +55,28 @@ function formatDate(timestamp) {
   return shortWeek[date.getDay()];
 }
 
+function displayForecast() {
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+    <div class="col-2">
+      <div id="first-date">${day}</div>
+        <img src="" alt="" width="60" id="first-day" />
+        <div class="weather-forecast-temperatures">
+        <span class="weather-forecast-temperature-max" id="temp-first">9º</span>
+        <span class="weather-forecast-temperature-min" id="temp-first">6º</span>
+      </div>
+    </div>
+    `;
+  });
+  forecastHTML = forecastHTML + "</div>";
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function showDegreeFahrenheit(event) {
   event.preventDefault();
   let temperature = document.querySelector("#today-temperature");
@@ -212,6 +234,8 @@ let celsiusTemperatureSecond = null;
 let celsiusTemperatureThird = null;
 let celsiusTemperatureFourth = null;
 let celsiusTemperatureFifth = null;
+
+displayForecast();
 
 let degreeCelsius = document.querySelector("#сelsius");
 let degreeFahrenheit = document.querySelector("#fahrenheit");

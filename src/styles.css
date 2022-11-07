@@ -130,3 +130,6 @@ li:first-letter {
 .weather-forecast-temperatures {
   font-size: 14px;
 }
+.forcast-line {
+  margin: auto;
+}
