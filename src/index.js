@@ -1,17 +1,3 @@
-function convertCtoF(celsius) {
-  let fahrn = (celsius * 9) / 5 + 32;
-  fahrn = Math.round(fahrn);
-  return fahrn;
-}
-
-function upperCity(city) {
-  let arrayCity = city.split(" ");
-  for (let i = 0; i < arrayCity.length; i++) {
-    arrayCity[i] = arrayCity[i].charAt(0).toUpperCase() + arrayCity[i].slice(1);
-  }
-  city = arrayCity.join(" ");
-  return city;
-}
 let week = [
   "Sunday",
   "Monday",
@@ -122,7 +108,6 @@ function showWeather(response) {
 }
 
 function displayForecast(response) {
-  console.log(response.data.daily);
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row forcast-line g-1">`;
